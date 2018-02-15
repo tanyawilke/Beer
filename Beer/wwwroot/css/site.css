@@ -1,7 +1,12 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background-color: pink;
+    background-color: RGB(247,231,205);
+    color: RGB(24, 13, 6);
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: inherit;
 }
 
 /* Wrapping element */
@@ -11,17 +16,35 @@
     padding-right: 15px;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+hr {
+    color: RGB(226, 166, 7);
+    background-color: RGB(226, 166, 7);
+    border-color: RGB(226, 166, 7);
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+.navbar-inverse {
+    background-color: RGB(226, 166, 7);
+    border-color: RGB(226, 166, 7);
 }
 
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav > li > a {
+    color: RGB(255, 255, 255);
+}
+
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: RGB(24, 13, 6);
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+    font-weight: bold;
+}
+
+footer {
+    color: RGB(24, 13, 6);
+    font-weight: bold;
+}
 /* QR code generator */
 #qrCode {
     margin: 15px;
@@ -30,7 +53,5 @@
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+    
 }
