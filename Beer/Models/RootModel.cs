@@ -10,7 +10,7 @@ namespace Beer.Models
         public int currentPage { get; set; }
         public int numberOfPages { get; set; }
         public int totalResults { get; set; }
-        public List<Datum> data { get; set; }
+        public List<BeerModel> data { get; set; }
         public string status { get; set; }
     }
 }
