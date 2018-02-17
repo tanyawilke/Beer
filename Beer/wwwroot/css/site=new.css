@@ -9,16 +9,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     color: inherit;
 }
 
- table>.data-table>.table-grid {
-    /*border: 1px solid RGB(226, 166, 7);*/
-}
-
-.table-grid>tbody>td {
-    padding: 3px;
-    border-collapse: collapse;
-    empty-cells: show;
-}
-
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
