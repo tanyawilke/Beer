@@ -1,8 +1,45 @@
-﻿@{
+﻿@model Beer.Models.RootModel;
+@{
     ViewData["Title"] = "Beer";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1>Beer</h1>
+<script>
+    //var json = JSON.parse(@Html.Raw(Model.data));
+    //console.log(json);
+    //var tableHTML = '<tr><td>Description</td><td>Something</td></tr>';
+    //for (var i = 0; i < json.Data.length; i++)
+    //    tableHTML += '<tr><td>' +  .Data[i]. + '</td><td>' + json.Data[i].Email + '</td></tr>';
+    //document.getElementById('mytable').innerHTML = tableHTML;
+</script>
+<div>There are @Model.numberOfPages pages of beer.  Perhaps you would like to refine your search using the search facility?</div>
+
+    <div><input type="search" id="search" /></div>
+    @*<table class="table-grid">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+            
+        </thead>
+        <tbody>
+            @foreach (var book in Model.data)
+            {
+                <tr>
+                    <td>@book.nameDisplay</td>
+                    <td>@book.description</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>*@
+    <div class="col-md-6 col-md-offset-3">
+        <ul>
+            
+        </ul>
+    </div>
+
 @*<div class="row">
     <div class="col-md-3">
         <h2>Application uses</h2>
