@@ -1,0 +1,123 @@
+﻿@model Beer.Models.BeerModel
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>View details</h1>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.nameDisplay)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nameDisplay)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.abv)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.abv)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.glasswareId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.glasswareId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.srmId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.srmId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.styleId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.styleId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.isOrganic)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.isOrganic)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.statusDisplay)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.statusDisplay)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.createDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.createDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.updateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.updateDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ibu)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ibu)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.availableId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.availableId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.originalGravity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.originalGravity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.servingTemperature)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.servingTemperature)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.servingTemperatureDisplay)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.servingTemperatureDisplay)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -9,14 +9,24 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     color: inherit;
 }
 
- table>.data-table>.table-grid {
+ table.table-grid {
     /*border: 1px solid RGB(226, 166, 7);*/
 }
 
-.table-grid>tbody>td {
+    .table-grid td {
+        padding: 3px;
+        border-collapse: collapse;
+        empty-cells: show;
+        border: 1px solid RGB(226, 166, 7);
+    }
+
+.table-grid th {
     padding: 3px;
     border-collapse: collapse;
     empty-cells: show;
+    border: 1px solid RGB(226, 166, 7);
+    background-color: RGB(226, 166, 7);
+    color: RGB(255, 255, 255);
 }
 
 /* Wrapping element */
@@ -58,6 +68,22 @@ footer {
 /* QR code generator */
 #qrCode {
     margin: 15px;
+}
+
+.marT10 {
+    margin-top: 10px;
+}
+
+.marT20 {
+    margin-top: 20px;
+}
+
+.marTB10 {
+    margin: 10px 0 10px 0;
+}
+
+.marTB20 {
+    margin: 20px 0 20px 0;
 }
 
 /* Hide/rearrange for smaller screens */

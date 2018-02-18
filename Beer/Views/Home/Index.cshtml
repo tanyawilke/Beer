@@ -9,26 +9,25 @@
         <p>There are @Model.numberOfPages pages of beer.  Perhaps you would like to refine your search using the search facility?</p>
 
         <div><input type="search" id="search" /></div>
-        <div class="data-table">
-            <table class="table-grid">
-                <thead>
+        <table class="table-grid marTB20">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model.data)
+                {
                     <tr>
-                        <th>Name</th>
-                        <th>Description</th>
+                        <td>@book.nameDisplay</td>
+                        <td>@book.description</td>
+                        <td>@Html.ActionLink("View details", "GetDetails", "Home", new { id = book.id }, null)</td>
                     </tr>
 
-                </thead>
-                <tbody>
-                    @foreach (var book in Model.data)
-            {
-                        <tr>
-                            <td>@book.nameDisplay</td>
-                            <td>@book.description</td>
-                        </tr>
-
-                    }
-                </tbody>
-            </table>
-        </div>
+                }
+            </tbody>
+        </table>
     </div>
 </div>

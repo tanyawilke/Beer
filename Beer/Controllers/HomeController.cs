@@ -41,6 +41,29 @@ namespace Beer.Controllers
             return View(data);
         }
 
+        public async Task<IActionResult> GetDetails(string id)
+        {
+            Uri geturi = new Uri("http://api.brewerydb.com/v2/beer/" + id + "/?key=ee8a1a84bc76fd7d7ae6dd0dc45583e3");
+            
+            HttpResponseMessage responseGet = await client.GetAsync(geturi);
+
+            // The EnsureSuccessStatusCode method throws an exception if the HTTP response was unsuccessful. 
+            // If the Content is not null, this method will also call Dispose to free managed and unmanaged resources.
+            responseGet.EnsureSuccessStatusCode();
+
+            var response = "";
+
+            if (responseGet.IsSuccessStatusCode)
+            {
+                response = await responseGet.Content.ReadAsStringAsync();                               
+            }
+
+            // Deserialise the data (include the Newtonsoft JSON Nuget package if you don't already have it) 
+            var data = JsonConvert.DeserializeObject<BeerModel>(response);
+
+            return View(data);
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace Beer.Models
 {
+    [JsonObject]
     public class BeerModel
     {
         public string id { get; set; }
