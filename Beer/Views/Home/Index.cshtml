@@ -7,8 +7,8 @@
 <div class="row">
     <div class="col-md-12">
         <p>There are @Model.numberOfPages pages of beer.  Perhaps you would like to refine your search using the search facility?</p>
-
-        <div><input type="search" id="search" /></div>
+        <div style="text-align: right;"><input type="search" id="search" /> Sort: @Html.ActionLink("ASC", "Index", "Home", new { sort = "ASC" }, null) | @Html.ActionLink("DESC", "Index", "Home", new { sort = "DESC" }, null)</div>
+        <div style="text-align: center;">Page @Model.currentPage</div>
         <table class="table-grid marTB20">
             <thead>
                 <tr>
@@ -28,6 +28,16 @@
 
                 }
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" style="width: 90%;">
+                        @for (var i = 1; i <= Model.numberOfPages; i++)
+                        {
+                            @Html.ActionLink(i.ToString() + " ", "Index", "Home", new { currentPage = i }, null);
+                        }
+                    </td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>
