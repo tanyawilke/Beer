@@ -1,0 +1,44 @@
+﻿@model Beer.Models.RootModel
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>Search result</h1>
+
+<div>
+    <div style="text-align: center;">Page @Model.currentPage</div>
+    <table class="table-grid marTB20">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var beer in Model.data)
+            {
+                <tr>
+                    <td>@beer.nameDisplay</td>
+                    <td>@beer.description</td>
+                    <td>@Html.ActionLink("View details", "GetDetails", "Home", new { id = beer.id }, null)</td>
+                </tr>
+
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" style="width: 90%; text-align: center;">
+                    @for (var i = 1; i <= Model.numberOfPages; i++)
+                    {
+                        @Html.ActionLink(i.ToString() + " ", "SearchResult", "Home", new { currentPage = i, searchParam = Model.searchParam }, null);
+                    }
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -11,5 +11,6 @@ namespace Beer.Models
         [JsonProperty("data")]
         public List<BeerModel> data { get; set; }
         public string status { get; set; }
+        public string searchParam { get; set; }
     }
 }

@@ -16,11 +16,14 @@ namespace Beer.Controllers
 {
     public class HomeController : Controller
     {
-        static HttpClient client = new HttpClient();
+        private static HttpClient client = new HttpClient();
+        private string baseUrl = "http://api.brewerydb.com/v2";
+        private string apiKey = "ee8a1a84bc76fd7d7ae6dd0dc45583e3";
 
-        public async Task<IActionResult> Index(int currentPage = 1, string sort = "ASC")
+        [HttpGet]
+        public async Task<IActionResult> Index(int currentPage = 1, string sort = "ASC", string apiParam="beers")
         {
-            Uri geturi = new Uri("http://api.brewerydb.com/v2/beers/?key=ee8a1a84bc76fd7d7ae6dd0dc45583e3&p=" + currentPage + "&sort=" + sort);
+            Uri geturi = new Uri(baseUrl + "/" + apiParam +"/?key=" + apiKey + "&p=" + currentPage + "&sort=" + sort);
 
             HttpResponseMessage responseGet = await client.GetAsync(geturi);
 
@@ -60,6 +63,30 @@ namespace Beer.Controllers
 
             // Deserialise the data (include the Newtonsoft JSON Nuget package if you don't already have it) 
             var data = JsonConvert.DeserializeObject<BeerModel>(response);
+
+            return View(data);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> SearchResult(string searchParam = "peach", int currentPage = 1)
+        {
+            Uri geturi = new Uri("http://api.brewerydb.com/v2/search/?key=ee8a1a84bc76fd7d7ae6dd0dc45583e3&type=beer&q=" + searchParam + "&p=" + currentPage);
+
+            HttpResponseMessage responseGet = await client.GetAsync(geturi);
+
+            // The EnsureSuccessStatusCode method throws an exception if the HTTP response was unsuccessful. 
+            // If the Content is not null, this method will also call Dispose to free managed and unmanaged resources.
+            responseGet.EnsureSuccessStatusCode();
+
+            var response = "";
+
+            if (responseGet.IsSuccessStatusCode)
+            {
+                response = await responseGet.Content.ReadAsStringAsync();
+            }
+
+            // Deserialise the data (include the Newtonsoft JSON Nuget package if you don't already have it) 
+            var data = JsonConvert.DeserializeObject<RootModel>(response);
 
             return View(data);
         }
