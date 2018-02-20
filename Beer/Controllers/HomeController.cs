@@ -51,21 +51,22 @@ namespace Beer.Controllers
             
             HttpResponseMessage responseGet = await client.GetAsync(geturi);
 
+            List<RootModel> data = null;
+
             // The EnsureSuccessStatusCode method throws an exception if the HTTP response was unsuccessful. 
             // If the Content is not null, this method will also call Dispose to free managed and unmanaged resources.
             responseGet.EnsureSuccessStatusCode();
 
-            var response = "";
-
             if (responseGet.IsSuccessStatusCode)
             {
-                response = await responseGet.Content.ReadAsStringAsync();                               
+                string response = await responseGet.Content.ReadAsStringAsync();
+
+                // Deserialise the data (include the Newtonsoft JSON Nuget package if you don't already have it) 
+                data = JsonConvert.DeserializeObject<List<RootModel>>(response);
             }
+            
 
-            // Deserialise the data (include the Newtonsoft JSON Nuget package if you don't already have it) 
-            var data = JsonConvert.DeserializeObject<RootModel>(response);
-
-            return View(data);
+            return View(data.ToString());
         }
 
         public async Task<IActionResult> SearchResult(string searchParam, int currentPage = 1, string apiParam = "search")
