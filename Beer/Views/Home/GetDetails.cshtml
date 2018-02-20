@@ -1,26 +1,30 @@
-﻿@model Beer.Models.BeerModel
+﻿@model Beer.Models.RootModel
 
 @{
     ViewData["Title"] = "View";
 }
 
 <h1>View details</h1>
-
 <div>
+    <a href="javascript: history.go(-1)">Back to List</a>
+</div>
+<div>
+    @foreach(var beer in Model.data)
+    { 
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.id)
+            @Html.DisplayNameFor(model => beer.id)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.id)
+            @Html.DisplayFor(model => beer.id)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.name)
+            @Html.DisplayNameFor(model => beer.name)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.name)
+            @Html.DisplayFor(model => beer.name)
         </dd>
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.nameDisplay)
         </dt>
         <dd>
@@ -115,9 +119,10 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.servingTemperatureDisplay)
-        </dd>
+        </dd>*@
     </dl>
+    }
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a href="javascript: history.go(-1)">Back to List</a>
 </div>

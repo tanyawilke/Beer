@@ -4,41 +4,55 @@
     ViewData["Title"] = "View";
 }
 
-<h1>Search result</h1>
+<h1>Search result for search query "@Model.searchParam"</h1>
 
 <div>
-    <div style="text-align: center;">Page @Model.currentPage</div>
-    <table class="table-grid marTB20">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Details</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var beer in Model.data)
-            {
+    <div>
+        <a href="javascript: history.go(-1)">Back to List</a>
+    </div>
+    @if (Model.data != null)
+    {
+        <div class="center">Page @Model.currentPage</div>
+        <table class="table-grid marTB20">
+            <thead>
                 <tr>
-                    <td>@beer.nameDisplay</td>
-                    <td>@beer.description</td>
-                    <td>@Html.ActionLink("View details", "GetDetails", "Home", new { id = beer.id }, null)</td>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Details</th>
                 </tr>
-
-            }
+            </thead>
+            <tbody>            
+                @foreach (var beer in Model.data)
+                {
+                    <tr>
+                        <td>@beer.nameDisplay</td>
+                        <td>@beer.description</td>
+                        <td>@Html.ActionLink("View details", "GetDetails", "Home", new { id = beer.id }, null)</td>
+                    </tr>
+                }
+            
         </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="3" style="width: 90%; text-align: center;">
-                    @for (var i = 1; i <= Model.numberOfPages; i++)
-                    {
-                        @Html.ActionLink(i.ToString() + " ", "SearchResult", "Home", new { currentPage = i, searchParam = Model.searchParam }, null);
-                    }
-                </td>
-            </tr>
-        </tfoot>
+        @if (Model.numberOfPages > 1)
+        {
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="center">
+                        @for (var i = 1; i <= Model.numberOfPages; i++)
+                        {
+                            @Html.ActionLink(i.ToString(), "SearchResult", "Home", new { searchParam = Model.searchParam, currentPage = i }, null)<span> </span>;
+                        }
+                    </td>
+                </tr>
+            </tfoot>
+        }
+        
     </table>
+    }
+    else
+    {
+        <div class="marTB20">No records were found for the search criteria you entered.</div>
+    }
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a href="javascript: history.go(-1)">Back to List</a>
 </div>

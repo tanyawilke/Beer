@@ -21,6 +21,15 @@ namespace Beer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+//            services..AddProxy(options =>
+//17          {
+//                options.PrepareRequest = (originalRequest, message) =>
+//                {
+//                    message.Headers.Add("X-Forwarded-Host", originalRequest.Host.Host);
+//                    return Task.FromResult(0);
+//                };
+//            });
+
             services.AddMvc();
         }
 
@@ -38,6 +47,8 @@ namespace Beer
             }
 
             app.UseStaticFiles();
+
+            //app.UseWebSockets()..RunProxy(new Uri("https://example.com"));
 
             app.UseMvc(routes =>
             {

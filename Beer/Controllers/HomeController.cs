@@ -23,7 +23,8 @@ namespace Beer.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int currentPage = 1, string sort = "ASC", string apiParam="beers")
         {
-            Uri geturi = new Uri(baseUrl + "/" + apiParam +"/?key=" + apiKey + "&p=" + currentPage + "&sort=" + sort);
+            //Uri geturi = new Uri(baseUrl + "/" + apiParam +"/?key=" + apiKey + "&p=" + currentPage + "&sort=" + sort);
+            Uri geturi = new Uri("http://api.brewerydb.com/v2/beers/?key=ee8a1a84bc76fd7d7ae6dd0dc45583e3&p=" + currentPage + "&sort=" + sort);
 
             HttpResponseMessage responseGet = await client.GetAsync(geturi);
 
@@ -44,9 +45,9 @@ namespace Beer.Controllers
             return View(data);
         }
 
-        public async Task<IActionResult> GetDetails(string id)
+        public async Task<IActionResult> GetDetails(string id, string apiParam = "beer")
         {
-            Uri geturi = new Uri("http://api.brewerydb.com/v2/beer/" + id + "/?key=ee8a1a84bc76fd7d7ae6dd0dc45583e3");
+            Uri geturi = new Uri(baseUrl + "/" + apiParam + "/" + id + "/?key=" + apiKey);
             
             HttpResponseMessage responseGet = await client.GetAsync(geturi);
 
@@ -62,14 +63,14 @@ namespace Beer.Controllers
             }
 
             // Deserialise the data (include the Newtonsoft JSON Nuget package if you don't already have it) 
-            var data = JsonConvert.DeserializeObject<BeerModel>(response);
+            var data = JsonConvert.DeserializeObject<RootModel>(response);
 
             return View(data);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> SearchResult(string searchParam = "peach", int currentPage = 1)
+        public async Task<IActionResult> SearchResult(string searchParam, int currentPage = 1, string apiParam = "search")
         {
+            //Uri geturi = new Uri(baseUrl + "/" + apiParam + "/?key=" + apiKey + "&type=beer&q=" + searchParam + "&p=" + currentPage);
             Uri geturi = new Uri("http://api.brewerydb.com/v2/search/?key=ee8a1a84bc76fd7d7ae6dd0dc45583e3&type=beer&q=" + searchParam + "&p=" + currentPage);
 
             HttpResponseMessage responseGet = await client.GetAsync(geturi);
@@ -80,13 +81,17 @@ namespace Beer.Controllers
 
             var response = "";
 
-            if (responseGet.IsSuccessStatusCode)
+            if (!responseGet.IsSuccessStatusCode)
             {
-                response = await responseGet.Content.ReadAsStringAsync();
+                RedirectToAction(nameof(Error));          
             }
+
+            response = await responseGet.Content.ReadAsStringAsync();
 
             // Deserialise the data (include the Newtonsoft JSON Nuget package if you don't already have it) 
             var data = JsonConvert.DeserializeObject<RootModel>(response);
+
+            data.searchParam = searchParam;
 
             return View(data);
         }
