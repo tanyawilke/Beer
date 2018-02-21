@@ -24,7 +24,6 @@ namespace Beer.Controllers
         public async Task<IActionResult> Index(int currentPage = 1, string sort = "ASC", string apiParam="beers")
         {
             Uri geturi = new Uri(baseUrl + "/" + apiParam +"/?key=" + apiKey + "&p=" + currentPage + "&sort=" + sort);
-            //Uri geturi = new Uri("http://api.brewerydb.com/v2/beers/?key=ee8a1a84bc76fd7d7ae6dd0dc45583e3&p=" + currentPage + "&sort=" + sort);
 
             HttpResponseMessage responseGet = await client.GetAsync(geturi);
 
