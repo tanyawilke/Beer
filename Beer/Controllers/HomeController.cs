@@ -23,8 +23,8 @@ namespace Beer.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int currentPage = 1, string sort = "ASC", string apiParam="beers")
         {
-            //Uri geturi = new Uri(baseUrl + "/" + apiParam +"/?key=" + apiKey + "&p=" + currentPage + "&sort=" + sort);
-            Uri geturi = new Uri("http://api.brewerydb.com/v2/beers/?key=ee8a1a84bc76fd7d7ae6dd0dc45583e3&p=" + currentPage + "&sort=" + sort);
+            Uri geturi = new Uri(baseUrl + "/" + apiParam +"/?key=" + apiKey + "&p=" + currentPage + "&sort=" + sort);
+            //Uri geturi = new Uri("http://api.brewerydb.com/v2/beers/?key=ee8a1a84bc76fd7d7ae6dd0dc45583e3&p=" + currentPage + "&sort=" + sort);
 
             HttpResponseMessage responseGet = await client.GetAsync(geturi);
 
@@ -51,7 +51,8 @@ namespace Beer.Controllers
             
             HttpResponseMessage responseGet = await client.GetAsync(geturi);
 
-            List<RootModel> data = null;
+            BeerModel dat1 = null;
+            string response = "";
 
             // The EnsureSuccessStatusCode method throws an exception if the HTTP response was unsuccessful. 
             // If the Content is not null, this method will also call Dispose to free managed and unmanaged resources.
@@ -59,20 +60,19 @@ namespace Beer.Controllers
 
             if (responseGet.IsSuccessStatusCode)
             {
-                string response = await responseGet.Content.ReadAsStringAsync();
-
-                // Deserialise the data (include the Newtonsoft JSON Nuget package if you don't already have it) 
-                data = JsonConvert.DeserializeObject<List<RootModel>>(response);
+                response = await responseGet.Content.ReadAsStringAsync();
             }
-            
 
-            return View(data.ToString());
+            // Gotcha discovered for .net core - deserialisation no matter how specified does not work when defined for Generic List
+            // When defined as usual, information returned from api cannot be binded to the model.
+            dat1 = JsonConvert.DeserializeObject<BeerModel>(response);            
+
+            return View(dat1);
         }
 
         public async Task<IActionResult> SearchResult(string searchParam, int currentPage = 1, string apiParam = "search")
         {
-            //Uri geturi = new Uri(baseUrl + "/" + apiParam + "/?key=" + apiKey + "&type=beer&q=" + searchParam + "&p=" + currentPage);
-            Uri geturi = new Uri("http://api.brewerydb.com/v2/search/?key=ee8a1a84bc76fd7d7ae6dd0dc45583e3&type=beer&q=" + searchParam + "&p=" + currentPage);
+            Uri geturi = new Uri(baseUrl + "/" + apiParam + "/?key=" + apiKey + "&type=beer&q=" + searchParam + "&p=" + currentPage);
 
             HttpResponseMessage responseGet = await client.GetAsync(geturi);
 
